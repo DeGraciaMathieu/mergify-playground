@@ -12,6 +12,6 @@ final class Shipping
 
     public function cost(Cart $cart): int
     {
-        return $cart->total() >= self::FREE_SHIPPING_THRESHOLD ? 0 : self::FLAT_RATE;
+        return $cart->subtotal() >= self::FREE_SHIPPING_THRESHOLD ? 0 : self::FLAT_RATE;
     }
 }
