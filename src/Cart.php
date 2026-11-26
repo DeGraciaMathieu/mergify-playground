@@ -20,7 +20,7 @@ final class Cart
         return $this;
     }
 
-    public function total(): int
+    public function subtotal(): int
     {
         return array_sum(array_map(
             fn (array $line): int => $line['price'] * $line['quantity'],
