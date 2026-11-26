@@ -6,7 +6,7 @@ namespace App;
 
 final class Shipping
 {
-    public const FREE_SHIPPING_THRESHOLD = 5000;
+    public const FREE_SHIPPING_THRESHOLD = 50000;
 
     public const FLAT_RATE = 490;
 
