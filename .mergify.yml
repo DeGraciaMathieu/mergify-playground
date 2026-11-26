@@ -1,0 +1,27 @@
+queue_rules:
+  - name: default
+    # Une PR entre dans la file quand les tests rapides passent…
+    queue_conditions:
+      - check-success=preliminary-tests
+    # …et n'est mergée qu'après les tests lents, joués sur « main + les PR devant elle ».
+    merge_conditions:
+      - check-success=pre-merge-tests
+    merge_method: squash
+    # Jusqu'à 3 PR testées dans un seul run de CI.
+    batch_size: 3
+    # On attend au plus 1 minute que le batch se remplisse.
+    batch_max_wait_time: 1 minute
+    # Nombre de découpages d'un batch rouge avant d'abandonner.
+    batch_max_failure_resolution_attempts: 3
+
+priority_rules:
+  - name: hotfix
+    conditions:
+      - label = urgent
+    priority: high
+    # Le hotfix interrompt les checks en cours pour passer devant.
+    allow_checks_interruption: true
+
+merge_queue:
+  # Deux batches testés en parallèle, le second par-dessus le premier.
+  max_parallel_checks: 2
